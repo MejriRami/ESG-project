@@ -1,0 +1,20 @@
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the requirements file for sentiment analysis
+COPY requirements_sentiment.txt .
+
+# Install the required dependencies
+RUN pip install --no-cache-dir -r requirements_sentiment.txt
+
+# Copy the current directory contents into the container at /app
+COPY . .
+
+# Expose the port that the sentiment analysis service will run on
+EXPOSE 5001
+
+# Command to run the sentiment analysis service
+CMD ["python", "sentiment_analysis.py"]

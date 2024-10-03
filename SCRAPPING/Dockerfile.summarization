@@ -1,0 +1,20 @@
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the requirements file for summarization
+COPY requirements_summarization.txt .
+
+# Install the required dependencies
+RUN pip install --no-cache-dir -r requirements_summarization.txt
+
+# Copy the current directory contents into the container at /app
+COPY . .
+
+# Expose the port that the summarization service will run on
+EXPOSE 5002
+
+# Command to run the summarization service
+CMD ["python", "summarization.py"]
